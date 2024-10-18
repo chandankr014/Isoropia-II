@@ -1,6 +1,3 @@
-Here is the `README.md` code for your project:
-
-```markdown
 # Isoropia-II Automation
 
 This project automates the execution of the **Isoropia II** software to process data in Excel/CSV format. The program reads the data, processes it using Isoropia II, and returns the results as a CSV file.

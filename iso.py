@@ -106,7 +106,7 @@ def main():
                 print("Error reading lines")
 
         artifacts_folder = 'artifacts'
-        # os.makedirs(artifacts_folder, exist_ok=True)
+        os.makedirs(artifacts_folder, exist_ok=True)
         try:
             if os.path.exists(screen_txt):
                 timestamp = pd.Timestamp.now().strftime('%Y%m%d_%H%M%S')

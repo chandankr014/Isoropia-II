@@ -1,2 +1,5 @@
-artifacts/*txt
-artifacts/*dat
+*txt
+*dat
+data/
+data_sathish/
+Output/

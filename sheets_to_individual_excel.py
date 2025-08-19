@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-def excel_sheets_to_csvs(excel_path, output_dir="data_sathish"):
+def excel_sheets_to_csvs(excel_path, output_dir="data_jayaraju2"):
     os.makedirs(output_dir, exist_ok=True)
     # Load the Excel file
     xls = pd.ExcelFile(excel_path)
@@ -18,5 +18,6 @@ def excel_sheets_to_csvs(excel_path, output_dir="data_sathish"):
         print(f"Saved {csv_filename}")
 
 if __name__ == "__main__":
-    excel_path = "Raw ALW_Code data  (1).xlsx" 
+    # excel_path = "Raw ALW_Code data  (1).xlsx" 
+    excel_path = "Filtered_Output_2014_2015_with_meteo_and_Ions (1).xlsx"
     excel_sheets_to_csvs(excel_path)

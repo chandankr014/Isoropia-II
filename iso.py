@@ -1,3 +1,4 @@
+from csv import excel
 import os
 import pandas as pd
 import subprocess
@@ -8,7 +9,7 @@ from glob import glob
 
 ##### ------- CONFIGURATION ------- #####
 exe_path = r"isrpia2.exe"
-DATA_DIR = "data_sathish"
+DATA_DIR = "data_jayaraju2"
 
 # 0 - FORWARD, 
 # 1 - REVERSE
@@ -99,17 +100,22 @@ def isoropia_processor(FP):
         FP (str): File path to the CSV file to process
     """
     try:
-        data = pd.read_csv(FP)
-        print(f"Processing file: {FP}")
-        print(f"Data shape: {data.shape}")
-        
+        if FP.endswith('.csv'):
+            data = pd.read_csv(FP)
+            print(f"Processing file: {FP}")
+            print(f"Data shape: {data.shape}")
+    
+        if FP.endswith('.xlsx'):
+            data = pd.read_excel(FP)
+            print(f"Processing file: {FP}")
+            print(f"Data shape: {data.shape}")
+
         # Validate required columns
-        required_columns = ['Na', 'SO42-', 'NH4+', 'NO3-', 'Cl-', 'Ca', 'K+', 'Mg', 'RH', 'Temp']
+        required_columns = ['Na+', 'SO42-', 'NH4+', 'NO3-', 'Cl-', 'Ca2+', 'K+', 'Mg2+', 'Relative Humidity (%)', 'Temperature (°C)']
         missing_columns = [col for col in required_columns if col not in data.columns]
         if missing_columns:
             print(f"Error: Missing required columns: {missing_columns}")
             return False
-            
     except Exception as e:
         print(f"Error reading file {FP}: {e}")
         return False
@@ -120,16 +126,16 @@ def isoropia_processor(FP):
     
     for index, df in data.iterrows():
         try:
-            na = df['Na']
-            so42 = df['SO42-']
-            nh4 = df['NH4+']
-            no3 = df['NO3-']
-            cl = df['Cl-']
-            ca = df['Ca']
-            k = df['K+']
-            mg = df['Mg']
-            rh = df['RH']
-            temp = df['Temp']
+            na = df['Na+'] 
+            so42 = df['SO42-'] 
+            nh4 = df['NH4+'] 
+            no3 = df['NO3-'] 
+            cl = df['Cl-'] 
+            ca = df['Ca2+'] 
+            k = df['K+'] 
+            mg = df['Mg2+'] 
+            rh = df['Relative Humidity (%)'] / 100  # Convert RH to fraction
+            temp = df['Temperature (°C)'] + 273.15  # Convert Temp to Kelvin
 
             chemicals = ['\n', f'{MODE}', f'{AEROSOL_STATE},0',
                         str(float(na)), str(float(so42)), 
